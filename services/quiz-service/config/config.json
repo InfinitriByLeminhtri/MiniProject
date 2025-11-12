@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "quiz_user",
+    "password": "quiz_pass",
+    "database": "quiz_db",
+    "host": "mysql-db",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "quiz_user",
+    "password": "quiz_pass",
+    "database": "quiz_db",
+    "host": "mysql-db",
+    "dialect": "mysql"
+  }
+}

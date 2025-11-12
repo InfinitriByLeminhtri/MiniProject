@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "result_user",
+    "password": "result_pass",
+    "database": "result_db",
+    "host": "mysql-db",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "result_user",
+    "password": "result_pass",
+    "database": "result_db",
+    "host": "mysql-db",
+    "dialect": "mysql"
+  }
+}

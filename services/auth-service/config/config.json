@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "auth_user",
+    "password": "auth_pass",
+    "database": "auth_db",
+    "host": "mysql-db",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "auth_user",
+    "password": "auth_pass",
+    "database": "auth_db",
+    "host": "mysql-db",
+    "dialect": "mysql"
+  }
+}
