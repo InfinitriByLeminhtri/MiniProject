@@ -21,7 +21,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install all dependencies
         run: |
@@ -50,12 +49,13 @@ jobs:
 
       - name: Create .env files
         run: |
-          cp services/auth-service/.env.example services/auth-service/.env
-          cp services/quiz-service/.env.example services/quiz-service/.env
-          cp services/result-service/.env.example services/result-service/.env
+          cp gateway/.env.example gateway/.env || echo "PORT=8000" > gateway/.env
+          cp services/auth-service/.env.example services/auth-service/.env || true
+          cp services/quiz-service/.env.example services/quiz-service/.env || true
+          cp services/result-service/.env.example services/result-service/.env || true
 
       - name: Start services
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Wait for services
         run: sleep 30
@@ -69,11 +69,11 @@ jobs:
 
       - name: Show logs on failure
         if: failure()
-        run: docker-compose logs
+        run: docker compose logs
 
       - name: Cleanup
         if: always()
-        run: docker-compose down -v
+        run: docker compose down -v
 
   docker-build:
     name: Build All Docker Images
@@ -84,5 +84,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Create .env files for build
+        run: |
+          cp gateway/.env.example gateway/.env || echo "PORT=8000" > gateway/.env
+          cp services/auth-service/.env.example services/auth-service/.env || true
+          cp services/quiz-service/.env.example services/quiz-service/.env || true
+          cp services/result-service/.env.example services/result-service/.env || true
+
       - name: Build all images
-        run: docker-compose build
+        run: docker compose build
