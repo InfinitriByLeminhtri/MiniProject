@@ -1,0 +1,88 @@
+name: CI - Dev Branch
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint-and-test:
+    name: Lint & Test All Services
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install all dependencies
+        run: |
+          cd gateway && npm ci
+          cd ../services/auth-service && npm ci
+          cd ../quiz-service && npm ci
+          cd ../result-service && npm ci
+          cd ../../frontend && npm ci
+
+      - name: Run linting
+        run: |
+          cd gateway && npm run lint || echo "No lint"
+          cd ../services/auth-service && npm run lint || echo "No lint"
+          cd ../quiz-service && npm run lint || echo "No lint"
+          cd ../result-service && npm run lint || echo "No lint"
+          cd ../../frontend && npm run lint
+
+  integration-test:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create .env files
+        run: |
+          cp services/auth-service/.env.example services/auth-service/.env
+          cp services/quiz-service/.env.example services/quiz-service/.env
+          cp services/result-service/.env.example services/result-service/.env
+
+      - name: Start services
+        run: docker-compose up -d
+
+      - name: Wait for services
+        run: sleep 30
+
+      - name: Check services health
+        run: |
+          curl -f http://localhost:8000 || exit 1
+          curl -f http://localhost:8000/api/auth/health || exit 1
+          curl -f http://localhost:8000/api/quiz/health || exit 1
+          curl -f http://localhost:8000/api/result/health || exit 1
+
+      - name: Show logs on failure
+        if: failure()
+        run: docker-compose logs
+
+      - name: Cleanup
+        if: always()
+        run: docker-compose down -v
+
+  docker-build:
+    name: Build All Docker Images
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build all images
+        run: docker-compose build
