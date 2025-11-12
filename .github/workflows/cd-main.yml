@@ -14,6 +14,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Create .env files
+        run: |
+          cp gateway/.env.example gateway/.env || echo "PORT=8000" > gateway/.env
+          cp services/auth-service/.env.example services/auth-service/.env || true
+          cp services/quiz-service/.env.example services/quiz-service/.env || true
+          cp services/result-service/.env.example services/result-service/.env || true
+
       - name: Validate docker-compose
         run: docker compose config --quiet
 
