@@ -3,6 +3,11 @@
 echo "🚀 Setting up Quiz Application..."
 
 # Copy .env files if not exist
+if [ ! -f gateway/.env ]; then
+  cp gateway/.env.example gateway/.env
+  echo "✅ Created gateway/.env"
+fi
+
 if [ ! -f services/auth-service/.env ]; then
   cp services/auth-service/.env.example services/auth-service/.env
   echo "✅ Created services/auth-service/.env"
