@@ -1,0 +1,20 @@
+services:
+  gateway:
+    volumes:
+      - ./gateway/src:/app/src
+    command: npm run dev
+
+  auth-service:
+    volumes:
+      - ./services/auth-service/src:/app/src
+    command: npm run dev
+
+  quiz-service:
+    volumes:
+      - ./services/quiz-service/src:/app/src
+    command: npm run dev
+
+  result-service:
+    volumes:
+      - ./services/result-service/src:/app/src
+    command: npm run dev

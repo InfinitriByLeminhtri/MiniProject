@@ -1,7 +1,9 @@
-node_modules
+node_modules/
 .env
-npm-debug.log
-.DS_Store
-dist
-build
 *.log
+.DS_Store
+dist/
+build/
+
+# Keep docker-compose.override.yml for local dev
+# docker-compose.override.yml

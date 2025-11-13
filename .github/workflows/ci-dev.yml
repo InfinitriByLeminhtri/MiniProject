@@ -54,6 +54,9 @@ jobs:
           cp services/quiz-service/.env.example services/quiz-service/.env || true
           cp services/result-service/.env.example services/result-service/.env || true
 
+      - name: Remove dev override for CI testing
+        run: rm -f docker-compose.override.yml
+
       - name: Start services
         run: docker compose up -d
 

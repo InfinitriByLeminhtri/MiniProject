@@ -65,6 +65,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Remove dev override for CI testing
+        run: rm -f docker-compose.override.yml
+
       - name: Build Gateway
         run: docker build -t gateway:test ./gateway
 
