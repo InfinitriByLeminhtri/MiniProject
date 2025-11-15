@@ -5,8 +5,8 @@ import {
 } from "lucide-react";
 import { useEffect } from "react";
 
-import UserHeader from "../../layouts/UserHeader";
-import FavoriteQuizCard from "../../components/Card/FavoriteQuizCard";
+import UserHeader from "../../../shared/components/UserHeader";
+import FavoriteQuizCard from "../components/FavoriteQuizCard";
 
 export default function FavoriteQuizzes() {
     const favoriteQuizzes = [

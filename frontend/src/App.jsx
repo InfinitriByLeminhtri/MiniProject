@@ -1,10 +1,15 @@
+
 import {
   Route,
   Routes,
   useLocation
 } from "react-router-dom"
 
-import NotFound from './features/user/pages/NotFound';
+import PublicRoutes from "./shared/routes/PublicRoutes";
+import AdminRoutes from "./shared/routes/AdminRoutes";
+import UserRoutes from "./shared/routes/UserRoutes";
+import NotFound from './shared/pages/NotFound';
+import Footer from './shared/components/Footer';
 
 const AppLayout = () => {
   const location = useLocation();
@@ -14,8 +19,6 @@ const AppLayout = () => {
     '/register',
     '*'
   ];
-
-
 
   const showFooterRoutes = [
     '/',
@@ -32,13 +35,13 @@ const AppLayout = () => {
         {/* Public Routes */}
         <Routes>
           {/* Public routes */}
-          {/* {PublicRoutes()} */}
+          {PublicRoutes()}
 
           {/* Admin routes */}
-          {/* {AdminRoutes()} */}
+          {AdminRoutes()}
 
           {/* User routes */}
-          {/* {UserRoutes()} */}
+          {UserRoutes()}
 
           {/* Not Found Routes */}
           <Route path='/*' element={<NotFound />} />

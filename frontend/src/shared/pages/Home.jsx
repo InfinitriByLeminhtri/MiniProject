@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import CTA from "../../components/CTA";
-import Categories from "../../features/quiz/components/Categories";
-import FeaturedQuizzes from "../Admin/FeaturedQuizzes";
-import UserHeader from "../../layouts/UserHeader";
+
+import CTA from "../components/CTA";
+import Categories from "../layout/Categories";
+import FeaturedQuizzes from "../layout/FeaturedQuizzes";
+import UserHeader from "../components/UserHeader";
 
 export default function Home() {
     const contentCTAGuest = {
