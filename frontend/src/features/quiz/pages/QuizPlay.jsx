@@ -19,7 +19,7 @@ const QuizPlay = () => {
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [answers, setAnswers] = useState({});
     const [showResults, setShowResults] = useState(false);
-    const [timeElapsed, setTimeElapsed] = useState(82); // in seconds
+    // const [timeElapsed, setTimeElapsed] = useState(82); // in seconds
 
     const quizData = {
         title: "Computer Science",
@@ -144,11 +144,11 @@ const QuizPlay = () => {
         return correct;
     };
 
-    const formatTime = (seconds) => {
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins}:${secs.toString().padStart(2, '0')}`;
-    };
+    // const formatTime = (seconds) => {
+    //     const mins = Math.floor(seconds / 60);
+    //     const secs = seconds % 60;
+    //     return `${mins}:${secs.toString().padStart(2, '0')}`;
+    // };
 
     // Results Page
     if (showResults) {
@@ -208,7 +208,7 @@ const QuizPlay = () => {
                             </div>
                             <div className="text-center p-4 bg-gray-50 rounded-xl">
                                 <div className="text-sm text-gray-600 mb-1">Time Taken</div>
-                                <div className="text-2xl font-bold text-blue-500">{formatTime(timeElapsed)}</div>
+                                {/* <div className="text-2xl font-bold text-blue-500">{formatTime(timeElapsed)}</div> */}
                             </div>
                             <div className="text-center p-4 bg-gray-50 rounded-xl">
                                 <div className="text-sm text-gray-600 mb-1">Level</div>
@@ -314,7 +314,7 @@ const QuizPlay = () => {
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">
                         <Clock className="w-5 h-5" />
-                        <span className="font-medium">{formatTime(timeElapsed)}</span>
+                        {/* <span className="font-medium">{formatTime(timeElapsed)}</span> */}
                     </div>
                 </div>
 
